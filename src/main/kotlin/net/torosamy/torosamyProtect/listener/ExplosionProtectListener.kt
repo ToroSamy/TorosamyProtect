@@ -92,25 +92,25 @@ class ExplosionProtectListener : Listener {
     }
 
     //当一个实体受到另外一个实体伤害时触发该事件
-    @EventHandler(priority = EventPriority.LOWEST, ignoreCancelled = true)
-    fun onEntityDamageByEntity(event: EntityDamageByEntityEvent) {
-        val player: Entity = event.damager
-        val beDamager: Entity = event.entity
-
-        if (player !is Player) return
-        if (player.isOp) return
-
-
-        if (hasResidence(beDamager.location)) return
-
-        val worldConfig = ConfigUtil.getWorldConfig(beDamager.world.name)
-        if (worldConfig == null) return
-
-        if (!worldConfig.explosionProtect) return
-        //TODO
-        if (!isExplosive(event.damager.type)) return
-
-        event.isCancelled = true
-    }
+//    @EventHandler(priority = EventPriority.LOWEST, ignoreCancelled = true)
+//    fun onEntityDamageByEntity(event: EntityDamageByEntityEvent) {
+//        val player: Entity = event.damager
+//        val beDamager: Entity = event.entity
+//
+//        if (player !is Player) return
+//        if (player.isOp) return
+//
+//
+//        if (hasResidence(beDamager.location)) return
+//
+//        val worldConfig = ConfigUtil.getWorldConfig(beDamager.world.name)
+//        if (worldConfig == null) return
+//
+//        if (!worldConfig.explosionProtect) return
+//        //TODO
+//        if (!isExplosive(event.damager.type)) return
+//
+//        event.isCancelled = true
+//    }
 
 }

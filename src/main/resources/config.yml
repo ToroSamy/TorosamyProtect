@@ -1,12 +1,14 @@
 enabled-worlds:
   - world
+  - world_nether
+  - world_the_end
 default-world-config:
   #耕地保护
   farm-protection: true
   #阻止更改刷怪笼类型
   prevent-change-spawner: true
   #爆炸保护
-  explosion-protection: true
+  explosion-protect: true
   #阻止交互容器
   prevent-interact-container: false
   #阻止放置方块

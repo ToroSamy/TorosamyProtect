@@ -1,7 +1,11 @@
 package net.torosamy.torosamyProtect.listener
 
 import net.torosamy.torosamyProtect.utils.ConfigUtil
+import org.bukkit.block.Beacon
 import org.bukkit.block.Container
+import org.bukkit.block.Dispenser
+import org.bukkit.block.Dropper
+import org.bukkit.block.EnderChest
 import org.bukkit.event.EventHandler
 import org.bukkit.event.EventPriority
 import org.bukkit.event.Listener
@@ -24,6 +28,10 @@ class InteractContainerListener :Listener {
         if (clickedBlock == null) return
         //如果右键的方块不是容器
         if (clickedBlock.state !is Container) return
+        if (clickedBlock.state !is Dispenser) return
+        if (clickedBlock.state !is Dropper) return
+        if (clickedBlock.state !is Beacon) return
+        if (clickedBlock.state !is EnderChest) return
         event.isCancelled = true
     }
 }
