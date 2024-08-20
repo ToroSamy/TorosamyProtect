@@ -6,9 +6,9 @@
 2. put the **dependencies** and this plugin into your plugins folder and start your server
 3. Modify the default configuration file generated and restart your server
 ## Permission
-- **Usage:** /tsp reload
-  **Description:** reload this plugin
-  **Permission:** torosamyProtect.reload
+- - **Usage:** /tsp reload
+  - **Description:** reload this plugin
+  - **Permission:** torosamyProtect.reload
 
 
 ## Config
