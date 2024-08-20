@@ -1,6 +1,6 @@
 ## Dependency
 - Residence
-- TorosTorosamyCoreamy
+- TorosamyCore
 ## Usage
 1. download [Residence](https://www.zrips.net/residence/) and [TorosamyCore](https://github.com/ToroSamy/TorosamyCore) as a dependency plugin
 2. put the **dependencies** and this plugin into your plugins folder and start your server
