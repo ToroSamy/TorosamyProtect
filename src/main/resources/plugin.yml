@@ -2,11 +2,8 @@ name: TorosamyProtect
 version: '1.0-SNAPSHOT'
 main: net.torosamy.torosamyProtect.TorosamyProtect
 api-version: '1.21'
-authors: [ Torosamy ]
+authors: [ Torosamy,yweiyang ]
 website: https://www.torosamy.net
 depend:
   - TorosamyCore
   - Residence
-#  - Multiverse-Core
-#  - Essentials
-#  - EssentialsX
