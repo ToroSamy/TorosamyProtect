@@ -2,6 +2,7 @@ package net.torosamy.torosamyProtect.listener
 
 
 import com.bekvon.bukkit.residence.api.ResidenceApi
+import net.torosamy.torosamyProtect.TorosamyProtect
 import net.torosamy.torosamyProtect.utils.ConfigUtil
 import org.bukkit.Location
 import org.bukkit.entity.Entity
@@ -44,7 +45,7 @@ class ExplosionProtectListener : Listener {
         if (worldConfig == null) return
 
         if (!worldConfig.explosionProtect) return
-        if (hasResidence(event.location)) return
+        if (TorosamyProtect.isUseRes && hasResidence(event.location)) return
         event.blockList().clear()
     }
 
@@ -54,7 +55,7 @@ class ExplosionProtectListener : Listener {
         if (worldConfig == null) return
 
         if (!worldConfig.explosionProtect) return
-        if (hasResidence(event.block.location)) return
+        if (TorosamyProtect.isUseRes && hasResidence(event.block.location)) return
         event.blockList().clear()
     }
 
@@ -68,7 +69,7 @@ class ExplosionProtectListener : Listener {
         //TODO
         if (!isExplosive(event.remover.type)) return
 
-        if (hasResidence(event.entity.location)) return
+        if (TorosamyProtect.isUseRes && hasResidence(event.entity.location)) return
 
         event.isCancelled = true
 
@@ -85,32 +86,9 @@ class ExplosionProtectListener : Listener {
 //        if (event.attacker == null) return
 //        if(!isExplosive(event.attacker.type)) return
 
-        if (hasResidence(event.vehicle.location)) return
+        if (TorosamyProtect.isUseRes && hasResidence(event.vehicle.location)) return
 
         event.isCancelled = true
 
     }
-
-    //当一个实体受到另外一个实体伤害时触发该事件
-//    @EventHandler(priority = EventPriority.LOWEST, ignoreCancelled = true)
-//    fun onEntityDamageByEntity(event: EntityDamageByEntityEvent) {
-//        val player: Entity = event.damager
-//        val beDamager: Entity = event.entity
-//
-//        if (player !is Player) return
-//        if (player.isOp) return
-//
-//
-//        if (hasResidence(beDamager.location)) return
-//
-//        val worldConfig = ConfigUtil.getWorldConfig(beDamager.world.name)
-//        if (worldConfig == null) return
-//
-//        if (!worldConfig.explosionProtect) return
-//        //TODO
-//        if (!isExplosive(event.damager.type)) return
-//
-//        event.isCancelled = true
-//    }
-
 }

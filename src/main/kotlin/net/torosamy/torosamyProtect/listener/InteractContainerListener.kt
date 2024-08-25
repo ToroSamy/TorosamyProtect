@@ -27,11 +27,25 @@ class InteractContainerListener :Listener {
         val clickedBlock = event.clickedBlock
         if (clickedBlock == null) return
         //如果右键的方块不是容器
-        if (clickedBlock.state !is Container) return
-        if (clickedBlock.state !is Dispenser) return
-        if (clickedBlock.state !is Dropper) return
-        if (clickedBlock.state !is Beacon) return
-        if (clickedBlock.state !is EnderChest) return
-        event.isCancelled = true
+        if (clickedBlock.state is Container) {
+            event.isCancelled = true
+            return
+        }
+        if (clickedBlock.state is Dispenser) {
+            event.isCancelled = true
+            return
+        }
+        if (clickedBlock.state is Dropper) {
+            event.isCancelled = true
+            return
+        }
+        if (clickedBlock.state is Beacon) {
+            event.isCancelled = true
+            return
+        }
+        if (clickedBlock.state is EnderChest) {
+            event.isCancelled = true
+            return
+        }
     }
 }

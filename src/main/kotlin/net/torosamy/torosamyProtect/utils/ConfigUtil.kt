@@ -1,7 +1,6 @@
 package net.torosamy.torosamyProtect.utils
 
 import net.torosamy.torosamyCore.manager.ConfigManager
-import net.torosamy.torosamyProtect.TorosamyProtect
 import net.torosamy.torosamyProtect.TorosamyProtect.Companion.plugin
 import net.torosamy.torosamyProtect.config.LangConfig
 import net.torosamy.torosamyProtect.config.MainConfig
