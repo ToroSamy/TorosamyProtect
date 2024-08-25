@@ -1,6 +1,11 @@
 ## Dependency
-- Residence
+- Residence[soft]
 - TorosamyCore
+## Function
+- When there is Residence, the Residence takes over and explodes
+- Basic protection of world management
+## FuturePlans
+- Add a ban on custom original items
 ## Usage
 1. download [Residence](https://www.zrips.net/residence/) and [TorosamyCore](https://github.com/ToroSamy/TorosamyCore) as a dependency plugin
 2. put the **dependencies** and this plugin into your plugins folder and start your server
@@ -53,4 +58,4 @@ reload-message: "&b[服务器娘]&a插件 &eTorosamyProtect &a重载成功喵~"
 
 ## License
 
-[MIT](./LICENSE)
+[GPL-3.0 license](./LICENSE)
