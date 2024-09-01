@@ -11,7 +11,6 @@ class ListenerUtil {
             TorosamyProtect.plugin.server.pluginManager.registerEvents(ChangeSpawnerListener(),TorosamyProtect.plugin)
             TorosamyProtect.plugin.server.pluginManager.registerEvents(BreakBlockListener(),TorosamyProtect.plugin)
             TorosamyProtect.plugin.server.pluginManager.registerEvents(PlaceBlockListener(),TorosamyProtect.plugin)
-            TorosamyProtect.plugin.server.pluginManager.registerEvents(FireSpreadListener(),TorosamyProtect.plugin)
             TorosamyProtect.plugin.server.pluginManager.registerEvents(ExplosionProtectListener(),TorosamyProtect.plugin)
         }
     }

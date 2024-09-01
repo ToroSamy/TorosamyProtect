@@ -19,7 +19,7 @@ class TorosamyProtect : JavaPlugin() {
         isUseRes = server.pluginManager.isPluginEnabled("Residence")
         if(isUseRes) Bukkit.getConsoleSender().sendMessage(MessageUtil.text("&a[服务器娘]&a插件 &eTorosamyProtect &a检测到 &eResidence &a开启"))
         else Bukkit.getConsoleSender().sendMessage(MessageUtil.text("&a[服务器娘]&c插件 &eTorosamyProtect &c检测到 &eResidence &c未开启"))
-        ConfigUtil.initConfig()
+        ConfigUtil.reloadConfig()
         CommandUtil.registerCommand()
         ListenerUtil.registerListener()
 

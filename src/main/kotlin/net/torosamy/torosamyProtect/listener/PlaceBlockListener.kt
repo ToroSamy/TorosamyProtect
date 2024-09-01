@@ -10,14 +10,13 @@ import org.bukkit.event.player.PlayerBucketEmptyEvent
 class PlaceBlockListener :Listener {
     @EventHandler(priority = EventPriority.LOWEST, ignoreCancelled = true)
     fun onBlockPlace(event: BlockPlaceEvent) {
-        if(event.getPlayer().isOp()) return
+        if(event.player.isOp) return
 
-        val worldConfig = ConfigUtil.getWorldConfig(event.player.world.name)
-        if (worldConfig == null) return
+        val worldConfig = ConfigUtil.worldConfigs[event.player.world.name] ?: return
 
         if (!worldConfig.preventPlace) return
 
-        event.setCancelled(true)
+        event.isCancelled = true
     }
 
     @EventHandler(priority = EventPriority.LOWEST, ignoreCancelled = true)
@@ -25,11 +24,10 @@ class PlaceBlockListener :Listener {
         if(event.player.isOp) return
 
 
-        val worldConfig = ConfigUtil.getWorldConfig(event.player.world.name)
-        if (worldConfig == null) return
+        val worldConfig = ConfigUtil.worldConfigs[event.player.world.name] ?: return
 
         if (!worldConfig.preventPlace) return
 
-        event.setCancelled(true)
+        event.isCancelled = true
     }
 }

@@ -13,6 +13,6 @@ class AdminCommands {
     @CommandDescription("重载TorosamyProtect配置文件")
     fun reloadConfig(sender: CommandSender) {
         ConfigUtil.reloadConfig()
-        sender.sendMessage(MessageUtil.text(ConfigUtil.getLangConfig().reloadMessage))
+        sender.sendMessage(MessageUtil.text(ConfigUtil.langConfig.reloadMessage))
     }
 }

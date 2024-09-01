@@ -14,22 +14,19 @@ class ChangeSpawnerListener:Listener {
         //op可以更改刷怪蛋
         if (event.player.isOp) return
 
-        val worldConfig = ConfigUtil.getWorldConfig(event.player.world.name)
-        if (worldConfig == null) return
+        val worldConfig = ConfigUtil.worldConfigs[event.player.world.name] ?: return
 
 
         if (!worldConfig.preventChangeSpawner) return
-        if(event.getAction() != Action.RIGHT_CLICK_BLOCK) return
+        if(event.action != Action.RIGHT_CLICK_BLOCK) return
         //如果玩家没有右键一个方块
-        val clickedBlock = event.getClickedBlock()
-        if (clickedBlock == null) return
-        if (clickedBlock.getType() != Material.SPAWNER) return
+        val clickedBlock = event.clickedBlock ?: return
+        if (clickedBlock.type != Material.SPAWNER) return
 
         //如果玩家手上不存在物品
-        val item = event.getItem()
-        if (item == null) return
+        val item = event.item ?: return
         //如果玩家手上不是刷怪蛋
-        if(!item.getType().name.endsWith("_SPAWN_EGG" )) return
+        if(!item.type.name.endsWith("_SPAWN_EGG" )) return
 
         event.isCancelled = true
     }

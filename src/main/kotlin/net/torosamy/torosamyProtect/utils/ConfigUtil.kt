@@ -1,66 +1,51 @@
 package net.torosamy.torosamyProtect.utils
 
 import net.torosamy.torosamyCore.manager.ConfigManager
-import net.torosamy.torosamyProtect.TorosamyProtect.Companion.plugin
+import net.torosamy.torosamyProtect.TorosamyProtect
 import net.torosamy.torosamyProtect.config.LangConfig
 import net.torosamy.torosamyProtect.config.MainConfig
 import net.torosamy.torosamyProtect.config.WorldConfig
 import org.bukkit.GameRule
-import org.bukkit.configuration.ConfigurationSection
 
 class ConfigUtil {
     companion object {
-        private var mainConfig: MainConfig = MainConfig()
-        private var mainConfigManager: ConfigManager = ConfigManager(mainConfig)
+        var mainConfig: MainConfig = MainConfig()
+        var langConfig: LangConfig = LangConfig()
+        var worldConfigs = HashMap<String, WorldConfig>()
 
-        private var langConfig: LangConfig = LangConfig()
-        private var langConfigManager: ConfigManager = ConfigManager(langConfig)
-
-
-        private var worldConfigs = HashMap<String, WorldConfig>()
+        private var mainConfigManager: ConfigManager = ConfigManager(mainConfig, TorosamyProtect.plugin,"","config.yml")
+        private var langConfigManager: ConfigManager = ConfigManager(langConfig, TorosamyProtect.plugin,"","lang.yml")
         private var worldConfigManagers = HashMap<String, ConfigManager>()
-        private lateinit var worldTemplate: ConfigurationSection
 
-        fun getMainConfig(): MainConfig {return mainConfig}
-        fun getLangConfig(): LangConfig {return langConfig}
-        fun getWorldConfig(worldName:String): WorldConfig? {return worldConfigs[worldName] }
-
-        fun initConfig() {
-            mainConfigManager.load(plugin, "config.yml")
-            langConfigManager.load(plugin, "lang.yml")
-            worldTemplate = mainConfigManager.yamlConfiguration.getConfigurationSection("default-world-config")!!
-            loadWorldConfigs()
-        }
 
         fun reloadConfig() {
-            mainConfigManager.load(plugin, "config.yml")
-            langConfigManager.load(plugin, "lang.yml")
+            mainConfigManager.load()
+            langConfigManager.load()
             loadWorldConfigs()
+        }
 
-        }
         fun saveConfig() {
-            mainConfigManager.saveFile()
-            langConfigManager.saveFile()
-            for (value in worldConfigManagers.values) { value.saveFile() }
+            mainConfigManager.save()
+            langConfigManager.save()
+            worldConfigManagers.values.forEach { it.save()}
         }
-        fun loadWorldConfigs() {
+
+
+        private fun loadWorldConfigs() {
+            val section = mainConfigManager.yaml.getConfigurationSection("default-world-config")!!
             worldConfigs.clear()
             worldConfigManagers.clear()
             for (world in mainConfig.enabledWorlds) {
                 val worldConfig = WorldConfig()
-                val worldManager = ConfigManager(worldConfig)
+                val worldManager = ConfigManager(worldConfig,TorosamyProtect.plugin,"worlds", "$world.yml",section)
+                worldManager.load()
+                worldConfigs[world] = worldConfig
+                worldConfigManagers[world] = worldManager
 
-                worldManager.loadTemplateFile(plugin,"worlds",world+".yml",worldTemplate)
-                worldManager.initConfig()
 
+                TorosamyProtect.plugin.server.getWorld(world)?.setGameRule(GameRule.KEEP_INVENTORY,worldConfig.KeepInventory)
+                TorosamyProtect.plugin.server.getWorld(world)?.setGameRule(GameRule.DO_FIRE_TICK,!worldConfig.PreventFireSpread)
 
-                for (serverWorld in plugin.server.worlds) {
-                    if (serverWorld.name == world) {
-                        serverWorld.setGameRule(GameRule.KEEP_INVENTORY,worldConfig.KeepInventory)
-                    }
-                }
-                worldConfigs.put(world,worldConfig)
-                worldConfigManagers.put(world, worldManager)
             }
         }
     }

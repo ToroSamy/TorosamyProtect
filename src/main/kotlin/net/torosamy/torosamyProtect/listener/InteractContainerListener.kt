@@ -1,11 +1,6 @@
 package net.torosamy.torosamyProtect.listener
 
 import net.torosamy.torosamyProtect.utils.ConfigUtil
-import org.bukkit.block.Beacon
-import org.bukkit.block.Container
-import org.bukkit.block.Dispenser
-import org.bukkit.block.Dropper
-import org.bukkit.block.EnderChest
 import org.bukkit.event.EventHandler
 import org.bukkit.event.EventPriority
 import org.bukkit.event.Listener
@@ -17,35 +12,12 @@ class InteractContainerListener :Listener {
         //如果是op则取消监听
         if (event.player.isOp) return
         //如果该世界未被监听
-        val worldConfig = ConfigUtil.getWorldConfig(event.player.world.name)
-        if (worldConfig == null) return
-
-
+        val worldConfig = ConfigUtil.worldConfigs[event.player.world.name] ?: return
         //如果开启了阻止打开容器
         if (!worldConfig.preventInteractContainer) return
         //如果没有右键方块
-        val clickedBlock = event.clickedBlock
-        if (clickedBlock == null) return
+        event.clickedBlock ?: return
         //如果右键的方块不是容器
-        if (clickedBlock.state is Container) {
-            event.isCancelled = true
-            return
-        }
-        if (clickedBlock.state is Dispenser) {
-            event.isCancelled = true
-            return
-        }
-        if (clickedBlock.state is Dropper) {
-            event.isCancelled = true
-            return
-        }
-        if (clickedBlock.state is Beacon) {
-            event.isCancelled = true
-            return
-        }
-        if (clickedBlock.state is EnderChest) {
-            event.isCancelled = true
-            return
-        }
+        event.isCancelled = true
     }
 }
