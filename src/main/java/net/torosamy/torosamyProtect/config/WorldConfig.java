@@ -11,4 +11,5 @@ public class WorldConfig extends TorosamyConfig {
     public Boolean PreventFireSpread;
     public Boolean KeepInventory;
     public Boolean explosionProtect;
+    public Boolean preventSculkCatalyst;
 }

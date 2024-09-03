@@ -19,3 +19,5 @@ default-world-config:
   prevent-fire-spread: true
   #是否开启死亡不掉落
   keep-inventory: true
+  #是否阻止幽匿催发体蔓延
+  prevent-sculk_catalyst: true
