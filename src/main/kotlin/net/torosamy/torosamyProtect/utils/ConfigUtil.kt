@@ -1,10 +1,12 @@
 package net.torosamy.torosamyProtect.utils
 
 import net.torosamy.torosamyCore.manager.ConfigManager
+import net.torosamy.torosamyCore.utils.MessageUtil
 import net.torosamy.torosamyProtect.TorosamyProtect
 import net.torosamy.torosamyProtect.config.LangConfig
 import net.torosamy.torosamyProtect.config.MainConfig
 import net.torosamy.torosamyProtect.config.WorldConfig
+import org.bukkit.Bukkit
 import org.bukkit.GameRule
 
 class ConfigUtil {
@@ -47,6 +49,8 @@ class ConfigUtil {
                 TorosamyProtect.plugin.server.getWorld(world)?.setGameRule(GameRule.DO_FIRE_TICK,!worldConfig.PreventFireSpread)
 
             }
+
+            Bukkit.getConsoleSender().sendMessage(MessageUtil.text("&a[服务器娘]&a插件 &eTorosamyProtect &a成功加载 &e${worldConfigs.size} &a个世界喵~"))
         }
     }
 }

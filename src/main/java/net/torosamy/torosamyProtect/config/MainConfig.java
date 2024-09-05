@@ -6,4 +6,5 @@ import java.util.List;
 
 public class MainConfig extends TorosamyConfig {
     public List<String> enabledWorlds;
+    public WorldConfig defaultWorldConfig = new WorldConfig();
 }
