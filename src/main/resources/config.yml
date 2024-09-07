@@ -2,6 +2,8 @@ enabled-worlds:
   - world
   - world_nether
   - world_the_end
+#打印爆炸的实体 和 伤害载具的实体
+debug: false
 default-world-config:
   #耕地保护
   farm-protection: true
@@ -11,6 +13,8 @@ default-world-config:
   explosion-protect: true
   #阻止交互容器
   prevent-interact-container: false
+  #忽略箱子和潜影箱
+  ignore-chest: false
   #阻止放置方块
   prevent-place: false
   #阻止破坏方块

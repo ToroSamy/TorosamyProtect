@@ -6,6 +6,7 @@ public class WorldConfig extends TorosamyConfig {
     public Boolean farmProtection;
     public Boolean preventChangeSpawner;
     public Boolean preventInteractContainer;
+    public Boolean ignoreChest;
     public Boolean preventPlace;
     public Boolean preventBreak;
     public Boolean PreventFireSpread;

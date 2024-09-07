@@ -5,6 +5,7 @@ import com.bekvon.bukkit.residence.api.ResidenceApi
 import net.torosamy.torosamyProtect.TorosamyProtect
 import net.torosamy.torosamyProtect.utils.ConfigUtil
 import org.bukkit.Location
+import org.bukkit.entity.Entity
 import org.bukkit.entity.EntityType
 import org.bukkit.entity.Player
 import org.bukkit.event.EventHandler
@@ -14,6 +15,7 @@ import org.bukkit.event.block.BlockExplodeEvent
 import org.bukkit.event.entity.EntityExplodeEvent
 import org.bukkit.event.hanging.HangingBreakByEntityEvent
 import org.bukkit.event.vehicle.VehicleDamageEvent
+import kotlin.math.E
 
 
 class ExplosionProtectListener : Listener {
@@ -22,9 +24,11 @@ class ExplosionProtectListener : Listener {
             return ResidenceApi.getResidenceManager().getByLoc(location) != null
         }
 
-        //TODO
         private fun isExplosive(type: EntityType): Boolean {
+            if (ConfigUtil.mainConfig.debug) println("isExplosive: ${type}")
+
             return when (type) {
+                EntityType.PLAYER,
                 EntityType.TNT,
                 EntityType.TNT_MINECART,
                 EntityType.CREEPER,
@@ -60,7 +64,8 @@ class ExplosionProtectListener : Listener {
         val worldConfig = ConfigUtil.worldConfigs[event.entity.world.name] ?: return
 
         if (!worldConfig.explosionProtect) return
-        //TODO
+
+
         if (!isExplosive(event.remover.type)) return
 
         if (TorosamyProtect.isUseRes && hasResidence(event.entity.location)) return
@@ -75,11 +80,16 @@ class ExplosionProtectListener : Listener {
         val worldConfig = ConfigUtil.worldConfigs[event.vehicle.world.name] ?: return
 
         if (!worldConfig.explosionProtect) return
-        //TODO
-//        if (event.attacker == null) return
-//        if(!isExplosive(event.attacker.type)) return
-
+        //如有领地存在 则交给领地监管
         if (TorosamyProtect.isUseRes && hasResidence(event.vehicle.location)) return
+
+        val attacker: Entity? = event.attacker
+
+        if (ConfigUtil.mainConfig.debug) println("vehicleDamage: ${attacker}")
+
+        if (attacker == null) return
+        if(!isExplosive(attacker.type)) return
+
 
         if (event.attacker is Player) return
 

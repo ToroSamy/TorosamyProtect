@@ -8,6 +8,7 @@ import net.torosamy.torosamyProtect.config.MainConfig
 import net.torosamy.torosamyProtect.config.WorldConfig
 import org.bukkit.Bukkit
 import org.bukkit.GameRule
+import org.bukkit.Material
 
 class ConfigUtil {
     companion object {
