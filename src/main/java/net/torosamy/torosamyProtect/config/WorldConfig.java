@@ -5,6 +5,7 @@ import net.torosamy.torosamyCore.config.TorosamyConfig;
 public class WorldConfig extends TorosamyConfig {
     public Boolean farmProtection;
     public Boolean preventChangeSpawner;
+    public Boolean preventInteractOther;
     public Boolean preventInteractContainer;
     public Boolean ignoreChest;
     public Boolean preventPlace;

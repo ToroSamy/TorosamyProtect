@@ -14,6 +14,7 @@ import org.bukkit.event.Listener
 import org.bukkit.event.block.BlockExplodeEvent
 import org.bukkit.event.entity.EntityExplodeEvent
 import org.bukkit.event.hanging.HangingBreakByEntityEvent
+import org.bukkit.event.hanging.HangingBreakEvent
 import org.bukkit.event.vehicle.VehicleDamageEvent
 import kotlin.math.E
 
@@ -47,6 +48,7 @@ class ExplosionProtectListener : Listener {
         if (!worldConfig.explosionProtect) return
         if (TorosamyProtect.isUseRes && hasResidence(event.location)) return
         event.blockList().clear()
+        event.isCancelled = true
     }
 
     @EventHandler(priority = EventPriority.LOWEST, ignoreCancelled = true)
@@ -56,6 +58,7 @@ class ExplosionProtectListener : Listener {
         if (!worldConfig.explosionProtect) return
         if (TorosamyProtect.isUseRes && hasResidence(event.block.location)) return
         event.blockList().clear()
+        event.isCancelled = true
     }
 
 
@@ -66,10 +69,9 @@ class ExplosionProtectListener : Listener {
         if (!worldConfig.explosionProtect) return
 
 
-        if (!isExplosive(event.remover.type)) return
+        if (event.cause != HangingBreakEvent.RemoveCause.EXPLOSION) return
 
         if (TorosamyProtect.isUseRes && hasResidence(event.entity.location)) return
-
         event.isCancelled = true
 
     }

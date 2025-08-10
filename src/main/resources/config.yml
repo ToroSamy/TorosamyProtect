@@ -11,7 +11,9 @@ default-world-config:
   prevent-change-spawner: true
   #爆炸保护
   explosion-protect: true
-  #阻止交互容器
+  #禁止交互
+  prevent-interact-other: false
+  #阻止交互箱子
   prevent-interact-container: false
   #忽略箱子和潜影箱
   ignore-chest: false

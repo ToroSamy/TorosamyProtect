@@ -1,5 +1,6 @@
 package net.torosamy.torosamyProtect.listener
 
+import net.torosamy.torosamyProtect.config.WorldConfig
 import net.torosamy.torosamyProtect.listener.PlaceBlockListener.Companion
 import net.torosamy.torosamyProtect.utils.ConfigUtil
 import org.bukkit.Material
