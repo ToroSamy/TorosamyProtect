@@ -1,5 +1,6 @@
 package net.torosamy.torosamyProtect.listener
 
+import net.torosamy.torosamyProtect.api.TorosamyProtectAPI
 import net.torosamy.torosamyProtect.utils.ConfigUtil
 import org.bukkit.Material
 import org.bukkit.entity.EntityType
@@ -13,7 +14,7 @@ import org.bukkit.event.player.PlayerInteractEvent
 class FarmProtectionListener :Listener {
     @EventHandler(priority = EventPriority.LOWEST, ignoreCancelled = true)
     fun onPlayerInteractEvent(event: PlayerInteractEvent) {
-        val worldConfig = ConfigUtil.worldConfigs[event.player.world.name] ?: return
+        val worldConfig = TorosamyProtectAPI.getWorld(event.player.world.name) ?: return
         //如果开启了耕地保护
         if(!worldConfig.farmProtection) return
         //如果没有右键方块
@@ -28,7 +29,7 @@ class FarmProtectionListener :Listener {
 
     @EventHandler(priority = EventPriority.LOWEST, ignoreCancelled = true)
     fun onEntityInteract(event: EntityInteractEvent) {
-        val worldConfig = ConfigUtil.worldConfigs[event.entity.world.name] ?: return
+        val worldConfig = TorosamyProtectAPI.getWorld(event.entity.world.name) ?: return
         //如果开启了耕地保护
         if(!worldConfig.farmProtection) return
 

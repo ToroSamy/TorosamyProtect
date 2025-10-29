@@ -3,6 +3,7 @@ package net.torosamy.torosamyProtect.listener
 
 import com.bekvon.bukkit.residence.api.ResidenceApi
 import net.torosamy.torosamyProtect.TorosamyProtect
+import net.torosamy.torosamyProtect.api.TorosamyProtectAPI
 import net.torosamy.torosamyProtect.utils.ConfigUtil
 import org.bukkit.Location
 import org.bukkit.entity.Entity
@@ -43,7 +44,7 @@ class ExplosionProtectListener : Listener {
 
     @EventHandler(priority = EventPriority.LOWEST, ignoreCancelled = true)
     fun onEntityExplode(event: EntityExplodeEvent) {
-        val worldConfig = ConfigUtil.worldConfigs[event.location.world.name] ?: return
+        val worldConfig = TorosamyProtectAPI.getWorld(event.location.world.name) ?: return
 
         if (!worldConfig.explosionProtect) return
         if (TorosamyProtect.isUseRes && hasResidence(event.location)) return
@@ -53,7 +54,7 @@ class ExplosionProtectListener : Listener {
 
     @EventHandler(priority = EventPriority.LOWEST, ignoreCancelled = true)
     fun onBlockExplode(event: BlockExplodeEvent) {
-        val worldConfig = ConfigUtil.worldConfigs[event.block.world.name] ?: return
+        val worldConfig = TorosamyProtectAPI.getWorld(event.block.world.name) ?: return
 
         if (!worldConfig.explosionProtect) return
         if (TorosamyProtect.isUseRes && hasResidence(event.block.location)) return
@@ -64,7 +65,7 @@ class ExplosionProtectListener : Listener {
 
     @EventHandler(priority = EventPriority.LOWEST, ignoreCancelled = true)
     fun onHangingBreakByEntity(event: HangingBreakByEntityEvent) {
-        val worldConfig = ConfigUtil.worldConfigs[event.entity.world.name] ?: return
+        val worldConfig = TorosamyProtectAPI.getWorld(event.entity.world.name) ?: return
 
         if (!worldConfig.explosionProtect) return
 
@@ -79,7 +80,7 @@ class ExplosionProtectListener : Listener {
     //载具受到伤害的事件
     @EventHandler(priority = EventPriority.LOWEST, ignoreCancelled = true)
     fun onVehicleDamage(event: VehicleDamageEvent) {
-        val worldConfig = ConfigUtil.worldConfigs[event.vehicle.world.name] ?: return
+        val worldConfig = TorosamyProtectAPI.getWorld(event.vehicle.world.name) ?: return
 
         if (!worldConfig.explosionProtect) return
         //如有领地存在 则交给领地监管

@@ -1,6 +1,7 @@
 package net.torosamy.torosamyProtect.commands
 
 import net.torosamy.torosamyCore.utils.MessageUtil
+import net.torosamy.torosamyProtect.api.TorosamyProtectAPI
 import net.torosamy.torosamyProtect.utils.ConfigUtil
 import org.bukkit.command.CommandSender
 import org.incendo.cloud.annotations.Command
@@ -13,6 +14,7 @@ class AdminCommands {
     @CommandDescription("重载TorosamyProtect配置文件")
     fun reloadConfig(sender: CommandSender) {
         ConfigUtil.reloadConfig()
-        sender.sendMessage(MessageUtil.text(ConfigUtil.langConfig.reloadMessage))
+        TorosamyProtectAPI.loadWorlds()
+        sender.sendMessage(MessageUtil.format(ConfigUtil.langConfig.reloadMessage))
     }
 }

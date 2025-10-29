@@ -1,5 +1,6 @@
 package net.torosamy.torosamyProtect.listener
 
+import net.torosamy.torosamyProtect.api.TorosamyProtectAPI
 import net.torosamy.torosamyProtect.utils.ConfigUtil
 import org.bukkit.Material
 import org.bukkit.event.EventHandler
@@ -28,7 +29,7 @@ class InteractContainerListener :Listener {
         //如果是op则取消监听
         if (event.player.isOp) return
         //如果该世界未被监听
-        val worldConfig = ConfigUtil.worldConfigs[event.player.world.name] ?: return
+        val worldConfig = TorosamyProtectAPI.getWorld(event.player.world.name) ?: return
 
         //如果没有右键方块
         val block = event.clickedBlock?:return

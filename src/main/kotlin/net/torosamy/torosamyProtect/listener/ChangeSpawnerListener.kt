@@ -1,5 +1,6 @@
 package net.torosamy.torosamyProtect.listener
 
+import net.torosamy.torosamyProtect.api.TorosamyProtectAPI
 import net.torosamy.torosamyProtect.utils.ConfigUtil
 import org.bukkit.Material
 import org.bukkit.event.EventHandler
@@ -11,10 +12,11 @@ import org.bukkit.event.player.PlayerInteractEvent
 class ChangeSpawnerListener:Listener {
     @EventHandler(priority = EventPriority.LOWEST, ignoreCancelled = true)
     fun onPlayerInteractEvent(event: PlayerInteractEvent) {
-        //op可以更改刷怪蛋
-        if (event.player.isOp) return
+        if(event.player.isOp) {
+            return
+        }
 
-        val worldConfig = ConfigUtil.worldConfigs[event.player.world.name] ?: return
+        val worldConfig = TorosamyProtectAPI.getWorld(event.player.world.name) ?: return
 
 
         if (!worldConfig.preventChangeSpawner) return

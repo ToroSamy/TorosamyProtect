@@ -1,5 +1,6 @@
 package net.torosamy.torosamyProtect.listener
 
+import net.torosamy.torosamyProtect.api.TorosamyProtectAPI
 import net.torosamy.torosamyProtect.listener.InteractContainerListener.Companion
 import net.torosamy.torosamyProtect.utils.ConfigUtil
 import org.bukkit.Material
@@ -28,23 +29,23 @@ class PlaceBlockListener :Listener {
     fun onBlockPlace(event: BlockPlaceEvent) {
         if(event.player.isOp) return
 
-        val worldConfig = ConfigUtil.worldConfigs[event.player.world.name] ?: return
+        val worldConfig = TorosamyProtectAPI.getWorld(event.player.world.name) ?: return
 
         if (!worldConfig.preventPlace) return
+        
         if (worldConfig.ignoreChest && isContainer(event.blockPlaced.type)) return
+        
         event.isCancelled = true
     }
 
     @EventHandler(priority = EventPriority.LOWEST, ignoreCancelled = true)
     fun onPlayerBucketEmpty(event: PlayerBucketEmptyEvent) {
         if(event.player.isOp) return
-
-
-        val worldConfig = ConfigUtil.worldConfigs[event.player.world.name] ?: return
+        
+        val worldConfig = TorosamyProtectAPI.getWorld(event.player.world.name) ?: return
 
         if (!worldConfig.preventPlace) return
-
-
+        
         event.isCancelled = true
     }
 }

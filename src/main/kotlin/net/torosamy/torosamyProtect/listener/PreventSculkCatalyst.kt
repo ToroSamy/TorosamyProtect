@@ -1,5 +1,6 @@
 package net.torosamy.torosamyProtect.listener
 
+import net.torosamy.torosamyProtect.api.TorosamyProtectAPI
 import net.torosamy.torosamyProtect.utils.ConfigUtil
 import org.bukkit.Material
 import org.bukkit.event.EventHandler
@@ -10,11 +11,12 @@ class PreventSculkCatalyst : Listener {
 
     @EventHandler
     fun blockFrom(event: BlockSpreadEvent) {
-        val worldConfig = ConfigUtil.worldConfigs[event.block.world.name] ?: return
+        val worldConfig = TorosamyProtectAPI.getWorld(event.block.world.name) ?: return
+        
         if (!worldConfig.preventSculkCatalyst) return
 
         if(event.source.type != Material.SCULK_CATALYST) return
+        
         event.isCancelled = true
-
     }
 }
