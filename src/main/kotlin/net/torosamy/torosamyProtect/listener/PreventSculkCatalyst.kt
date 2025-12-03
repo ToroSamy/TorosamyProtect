@@ -11,11 +11,13 @@ class PreventSculkCatalyst : Listener {
 
     @EventHandler
     fun blockFrom(event: BlockSpreadEvent) {
+        if(event.source.type != Material.SCULK_CATALYST) {
+            return
+        }
+        
         val worldConfig = TorosamyProtectAPI.getWorld(event.block.world.name) ?: return
         
         if (!worldConfig.preventSculkCatalyst) return
-
-        if(event.source.type != Material.SCULK_CATALYST) return
         
         event.isCancelled = true
     }

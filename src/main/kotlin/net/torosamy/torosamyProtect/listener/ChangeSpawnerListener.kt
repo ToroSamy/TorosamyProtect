@@ -1,7 +1,6 @@
 package net.torosamy.torosamyProtect.listener
 
 import net.torosamy.torosamyProtect.api.TorosamyProtectAPI
-import net.torosamy.torosamyProtect.utils.ConfigUtil
 import org.bukkit.Material
 import org.bukkit.event.EventHandler
 import org.bukkit.event.EventPriority
@@ -16,20 +15,28 @@ class ChangeSpawnerListener:Listener {
             return
         }
 
-        val worldConfig = TorosamyProtectAPI.getWorld(event.player.world.name) ?: return
+        if(event.action != Action.RIGHT_CLICK_BLOCK) {
+            return
+        }
 
-
-        if (!worldConfig.preventChangeSpawner) return
-        if(event.action != Action.RIGHT_CLICK_BLOCK) return
-        //如果玩家没有右键一个方块
         val clickedBlock = event.clickedBlock ?: return
-        if (clickedBlock.type != Material.SPAWNER) return
 
-        //如果玩家手上不存在物品
+        if (clickedBlock.type != Material.SPAWNER) {
+            return
+        }
+
         val item = event.item ?: return
-        //如果玩家手上不是刷怪蛋
-        if(!item.type.name.endsWith("_SPAWN_EGG" )) return
 
+        if(!item.type.name.endsWith("_SPAWN_EGG" )) {
+            return
+        }
+
+        val worldConfig = TorosamyProtectAPI.getWorld(event.player.world.name) ?: return
+        
+        if (!worldConfig.preventChangeSpawner.prevent(item.type.name)) {
+            return
+        }
+        
         event.isCancelled = true
     }
 }

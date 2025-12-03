@@ -6,13 +6,14 @@ import net.torosamy.torosamyProtect.listener.*
 class ListenerUtil {
     companion object{
         fun registerListener() {
-            TorosamyProtect.plugin.server.pluginManager.registerEvents(InteractContainerListener(),TorosamyProtect.plugin)
+            TorosamyProtect.plugin.server.pluginManager.registerEvents(PreventInteractListener(),TorosamyProtect.plugin)
             TorosamyProtect.plugin.server.pluginManager.registerEvents(FarmProtectionListener(),TorosamyProtect.plugin)
             TorosamyProtect.plugin.server.pluginManager.registerEvents(ChangeSpawnerListener(),TorosamyProtect.plugin)
             TorosamyProtect.plugin.server.pluginManager.registerEvents(BreakBlockListener(),TorosamyProtect.plugin)
             TorosamyProtect.plugin.server.pluginManager.registerEvents(PlaceBlockListener(),TorosamyProtect.plugin)
             TorosamyProtect.plugin.server.pluginManager.registerEvents(ExplosionProtectListener(),TorosamyProtect.plugin)
             TorosamyProtect.plugin.server.pluginManager.registerEvents(PreventSculkCatalyst(),TorosamyProtect.plugin)
+            TorosamyProtect.plugin.server.pluginManager.registerEvents(PreventCraftListener(),TorosamyProtect.plugin)
         }
     }
 }

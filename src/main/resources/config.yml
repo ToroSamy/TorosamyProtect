@@ -1,29 +1,2 @@
-enabled-worlds:
-  - world
-  - world_nether
-  - world_the_end
 #打印爆炸的实体 和 伤害载具的实体
 debug: false
-default-world-config:
-  #耕地保护
-  farm-protection: true
-  #阻止更改刷怪笼类型
-  prevent-change-spawner: true
-  #爆炸保护
-  explosion-protect: true
-  #禁止交互
-  prevent-interact-other: false
-  #阻止交互箱子
-  prevent-interact-container: false
-  #忽略箱子和潜影箱
-  ignore-chest: false
-  #阻止放置方块
-  prevent-place: false
-  #阻止破坏方块
-  prevent-break: false
-  #阻止火焰蔓延
-  prevent-fire-spread: true
-  #是否开启死亡不掉落
-  keep-inventory: true
-  #是否阻止幽匿催发体蔓延
-  prevent-sculk-catalyst: true

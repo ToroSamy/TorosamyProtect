@@ -1,0 +1,90 @@
+#耕地保护
+farmProtection: true
+#是否阻止幽匿催发体蔓延
+preventSculkCatalyst: true
+#阻止更改刷怪笼类型
+preventChangeSpawner:
+  enable: true
+  is-prevent-list: false
+  list: []
+#爆炸保护
+explosionProtect:
+  enable: true
+  is-prevent-list: false
+  list: 
+    - "WIND_CHARGE"
+#禁止交互
+preventInteractBlock:
+  enable: false
+  is-prevent-list: false
+  list: []
+preventInteractItem:
+  enable: false
+  is-prevent-list: false
+  list: []
+#阻止放置方块
+preventPlace:
+  enable: false
+  is-prevent-list: false
+  list: []
+#阻止破坏方块
+preventBreak:
+  enable: false
+  is-prevent-list: false
+  list: []
+
+
+# 不写就不会配置 因为我是懒狗 所以不配置
+gameRuleBool:
+  doFireTick: true
+  keepInventory: true
+#  announceAdvancements: true
+#  commandBlockOutput: true
+#  disableElytraMovementCheck: false
+#  doDaylightCycle: true
+#  doEntityDrops: true
+#  doLimitedCrafting: false
+#  doMobLoot: true
+#  projectilesCanBreakBlocks: true
+#  doMobSpawning: true
+#  doTileDrops: true
+#  doWeatherCycle: true
+#  logAdminCommands: true
+#  mobGriefing: true
+#  naturalRegeneration: true
+#  reducedDebugInfo: false
+#  sendCommandFeedback: true
+#  showDeathMessages: true
+#  spectatorsGenerateChunks: true
+#  disableRaids: false
+#  doInsomnia: true
+#  doImmediateRespawn: false
+#  drowningDamage: true
+#  fallDamage: true
+#  fireDamage: true
+#  freezeDamage: true
+#  doPatrolSpawning: true
+#  doTraderSpawning: true
+#  doWardenSpawning: true
+#  forgiveDeadPlayers: true
+#  universalAnger: false
+#  blockExplosionDropDecay: true
+#  mobExplosionDropDecay: true
+#  tntExplosionDropDecay: false
+#  waterSourceConversion: true
+#  lavaSourceConversion: false
+#  globalSoundEvents: true
+#  doVinesSpread: true
+#  enderPearlsVanishOnDeath: true
+gameRuleNumber:
+#  randomTickSpeed: 3
+#  spawnRadius: 10
+#  maxEntityCramming: 24
+#  maxCommandChainLength: 65536
+#  maxCommandForkCount: 65536
+#  commandModificationBlockLimit: 32768
+#  playersSleepingPercentage: 100
+#  snowAccumulationHeight: 1
+#  playersNetherPortalDefaultDelay: 80
+#  playersNetherPortalCreativeDelay: 0
+#  spawnChunkRadius: 2

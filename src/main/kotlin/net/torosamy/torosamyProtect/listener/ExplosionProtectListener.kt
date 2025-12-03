@@ -46,8 +46,15 @@ class ExplosionProtectListener : Listener {
     fun onEntityExplode(event: EntityExplodeEvent) {
         val worldConfig = TorosamyProtectAPI.getWorld(event.location.world.name) ?: return
 
-        if (!worldConfig.explosionProtect) return
-        if (TorosamyProtect.isUseRes && hasResidence(event.location)) return
+        if (!worldConfig.explosionProtect.prevent(event.entity.type.name)) {
+            return
+        }
+        
+        if (TorosamyProtect.isUseRes && hasResidence(event.location)) {
+            return
+        }
+
+
         event.blockList().clear()
         event.isCancelled = true
     }
@@ -56,8 +63,14 @@ class ExplosionProtectListener : Listener {
     fun onBlockExplode(event: BlockExplodeEvent) {
         val worldConfig = TorosamyProtectAPI.getWorld(event.block.world.name) ?: return
 
-        if (!worldConfig.explosionProtect) return
-        if (TorosamyProtect.isUseRes && hasResidence(event.block.location)) return
+        if (!worldConfig.explosionProtect.prevent(event.block.type.name)) {
+            return
+        }
+
+        if (TorosamyProtect.isUseRes && hasResidence(event.block.location)) {
+            return
+        }
+        
         event.blockList().clear()
         event.isCancelled = true
     }
@@ -65,38 +78,46 @@ class ExplosionProtectListener : Listener {
 
     @EventHandler(priority = EventPriority.LOWEST, ignoreCancelled = true)
     fun onHangingBreakByEntity(event: HangingBreakByEntityEvent) {
+        if (event.cause != HangingBreakEvent.RemoveCause.EXPLOSION) {
+            return
+        }
+        
         val worldConfig = TorosamyProtectAPI.getWorld(event.entity.world.name) ?: return
 
-        if (!worldConfig.explosionProtect) return
+        if (!worldConfig.explosionProtect.prevent(event.entity.type.name)) {
+            return
+        }
 
-
-        if (event.cause != HangingBreakEvent.RemoveCause.EXPLOSION) return
-
-        if (TorosamyProtect.isUseRes && hasResidence(event.entity.location)) return
+        if (TorosamyProtect.isUseRes && hasResidence(event.entity.location)) {
+            return
+        }
+        
         event.isCancelled = true
-
     }
 
     //载具受到伤害的事件
     @EventHandler(priority = EventPriority.LOWEST, ignoreCancelled = true)
     fun onVehicleDamage(event: VehicleDamageEvent) {
+        val attacker = event.attacker ?: return
+
+        if(!isExplosive(attacker.type)) {
+            return
+        }
+
+        if (attacker is Player) {
+            return
+        }
+        
         val worldConfig = TorosamyProtectAPI.getWorld(event.vehicle.world.name) ?: return
 
-        if (!worldConfig.explosionProtect) return
-        //如有领地存在 则交给领地监管
-        if (TorosamyProtect.isUseRes && hasResidence(event.vehicle.location)) return
+        if (!worldConfig.explosionProtect.prevent(event.vehicle.world.name)) {
+            return
+        }
 
-        val attacker: Entity? = event.attacker
-
-        if (ConfigUtil.mainConfig.debug) println("vehicleDamage: ${attacker}")
-
-        if (attacker == null) return
-        if(!isExplosive(attacker.type)) return
-
-
-        if (event.attacker is Player) return
-
+        if (TorosamyProtect.isUseRes && hasResidence(event.vehicle.location)) {
+            return
+        }
+        
         event.isCancelled = true
-
     }
 }

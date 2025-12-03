@@ -33,7 +33,6 @@ class TorosamyProtect : JavaPlugin() {
 
     override fun onDisable() {
         ConfigUtil.saveConfig()
-        TorosamyProtectAPI.saveWorlds()
         Bukkit.getConsoleSender().sendMessage(MessageUtil.format ("&b[服务器娘]&c插件 &eTorosamyProtect &c成功关闭喵~"))
         Bukkit.getConsoleSender().sendMessage(MessageUtil.format ("&b[服务器娘]&c作者 &eTorosamy|yweiyang"))
     }
