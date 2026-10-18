@@ -15,8 +15,6 @@ class PreventInteractListener :Listener {
 
         val block = event.clickedBlock ?: return
 
-        event.player.equipment.itemInMainHand
-        
         if (event.action != Action.RIGHT_CLICK_BLOCK) {
             return
         }
